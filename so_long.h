@@ -1,0 +1,48 @@
+
+#ifndef SO_LONG_H
+# define SO_LONG_H
+
+# include <mlx.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <math.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+
+# include "libft/libft.h"
+# include "gnl/get_next_line_bonus.h"
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}       t_mlx;
+
+typedef struct s_info
+{
+	int     map_width;
+	int     map_height;
+	int     player_x;
+	int     player_y;
+	int     exit_x;
+	int     exit_y;
+	int     collectibles;
+	int     moves;
+	char    **map;
+}    t_info;
+
+
+void    exit_error(char *error);
+int     close_window(t_mlx *mlx);
+void    hook_controls(t_mlx *mlx);
+void	parser(t_mlx *mlx, char *file);
+int		valid_character(char c);
+
+# endif
