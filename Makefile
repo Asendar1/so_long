@@ -11,6 +11,7 @@ MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 NAME = so_long
 INCLUDES = -I$(MLX_DIR) -I.
 LIBFT = -L./libft -lft
+FTPRINT_F = -L./ft_printf -lftprintf
 
 
 all: $(NAME)
@@ -19,7 +20,8 @@ $(MLX_DIR)/libmlx.a:
 	$(MAKE) -C $(MLX_DIR)
 $(NAME): $(OBJS) $(MLX_DIR)/libmlx.a
 	make -C libft
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+	make -C ft_printf
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(FTPRINT_F) $(MLX) -o $(NAME)
 
 clean:
 	make clean -C ./libft

@@ -28,8 +28,8 @@ int main (int argc, char **argv)
     if (argc == 2)
     {
         mlx = malloc(sizeof(t_mlx));
-        mlx = init_mlx(argv[1], mlx);
         parser(mlx, argv[1]);
+        mlx = init_mlx(argv[1], mlx);
         hook_controls(mlx);
         mlx_loop(mlx->mlx);
     }
