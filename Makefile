@@ -1,4 +1,4 @@
-SRCS = main.c controls.c utils.c parser.c parser_utils.c \
+SRCS = main.c controls.c utils.c parser.c parser_utils.c draw.c \
 		gnl/get_next_line_bonus.c
 
 OBJS = $(SRCS:.c=.o)

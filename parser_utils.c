@@ -12,8 +12,7 @@ int	all_one(char *line)
 	int	i;
 
 	i = 0;
-	printf("line at all_one: %s\n",line);
-	while(line[i-1])
+	while(line[i])
 	{
 		if (line[i] != '1')
 			return (0);
@@ -26,9 +25,8 @@ int start_end_one(char *line)
 {
 	size_t i;
 
-	printf("line at start_end_one: %s\n",line);
 	i = ft_strlen(line);
-	if (line[0] == '1' && line[i] == '1')
+	if (line[0] == '1' && line[i - 1] == '1')
 		return (1);
 	return (0);
 }

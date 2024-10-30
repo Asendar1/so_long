@@ -50,5 +50,6 @@ void	parser(t_mlx *mlx, char *file);
 int		valid_character(char c);
 int		all_one(char *line);
 int		start_end_one(char *line);
+void	draw_map(t_mlx *mlx);
 
 # endif

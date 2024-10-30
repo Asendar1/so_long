@@ -1,4 +1,3 @@
-
 #include "so_long.h"
 
 static int	check_content(char *file)
@@ -29,43 +28,38 @@ static int	check_content(char *file)
 	return(n_lines);
 }
 
-static char	*remove_nl(char	*line)
+static char *remove_nl(char *line)
 {
-	int	i;
-	char	*str_rtn;
+    int i;
+    char *str_rtn;
 
-	str_rtn = ft_strdup(line);
-	free(line);
-	i = 0;
-	while(str_rtn[i] != '\0')
-		i++;
-	if (str_rtn[i] == '\n')
-		str_rtn[i] = '\0';
-	return (str_rtn);
+    str_rtn = ft_strdup(line);
+    free(line);
+    i = 0;
+    while (str_rtn[i] != '\0')
+    {
+        if (str_rtn[i] == '\n')
+        {
+            str_rtn[i] = '\0';
+            break;
+        }
+        i++;
+    }
+    return str_rtn;
 }
 
-void static	extract_map(t_info *info, int n_lines)
+static void	extract_map(t_info *info, int n_lines)
 {
 	// int	i;
 
 	// i = 0;
-	n_lines -= 1;
-	ft_printf("n_lines after while: %d\n",n_lines);
-
-	ft_printf("before call: %s\n", info->map[0]);
+	n_lines -= 2;
 	if (!all_one(info->map[0]) && !all_one(info->map[n_lines]))
 		exit_error("Error\nFirst Line and Last Line not all 1");
-	while (!start_end_one(info->map[n_lines]) && n_lines > 0)
-	{
-		ft_printf("n_lines after while: %d\n",n_lines);
+	while (start_end_one(info->map[n_lines]) && n_lines >= 1)
 		n_lines--;
-	}
-	ft_printf("exit while\n");
-	if(n_lines != 1)
-	{
-		ft_printf("n_lines after while: %d\n",n_lines);
+	if(n_lines != 0)
 		exit_error("Error\n map not surrounded by 1");
-	}
 }
 
 static void	store_map(char *file, t_info *info)
@@ -76,7 +70,6 @@ static void	store_map(char *file, t_info *info)
 	int		n_lines;
 
 	n_lines = check_content(file) - 1;
-	ft_printf("%d\n", n_lines);
 	info->map = malloc(n_lines * sizeof(char *));
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
@@ -99,5 +92,4 @@ void parser(t_mlx *mlx, char *file)
 	if (!mlx->info)
 		exit_error("Malloc Faliure\n");
 	store_map(file, mlx->info);
-	
 }
