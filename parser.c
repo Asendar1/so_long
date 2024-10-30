@@ -32,30 +32,39 @@ static int	check_content(char *file)
 static char	*remove_nl(char	*line)
 {
 	int	i;
+	char	*str_rtn;
 
+	str_rtn = ft_strdup(line);
+	free(line);
 	i = 0;
-	while (line[i] != '\0')
+	while(str_rtn[i] != '\0')
 		i++;
-	if (line[i] == '\n')
-		line[i] = '\0';
-	return (line);
+	if (str_rtn[i] == '\n')
+		str_rtn[i] = '\0';
+	return (str_rtn);
 }
 
-void	extract_map(t_info *info, int n_lines)
+void static	extract_map(t_info *info, int n_lines)
 {
 	// int	i;
 
 	// i = 0;
-	n_lines -= 2;
+	n_lines -= 1;
+	ft_printf("n_lines after while: %d\n",n_lines);
+
 	ft_printf("before call: %s\n", info->map[0]);
 	if (!all_one(info->map[0]) && !all_one(info->map[n_lines]))
 		exit_error("Error\nFirst Line and Last Line not all 1");
-	while (!start_end_one(info->map[n_lines]) && n_lines >= 1)
+	while (!start_end_one(info->map[n_lines]) && n_lines > 0)
+	{
+		ft_printf("n_lines after while: %d\n",n_lines);
 		n_lines--;
+	}
+	ft_printf("exit while\n");
 	if(n_lines != 1)
 	{
 		ft_printf("n_lines after while: %d\n",n_lines);
-		// exit_error("Error\n map not surrounded by 1");
+		exit_error("Error\n map not surrounded by 1");
 	}
 }
 
@@ -76,10 +85,9 @@ static void	store_map(char *file, t_info *info)
 	{
 		info->map[i] = remove_nl(line);
 		line = get_next_line(fd);
-		ft_printf("%s\n",info->map[i]);
-		// free(line);
 		i++;
 	}
+	free(line);
 	info->map[i] = NULL;
 	close(fd);
 	extract_map(info, n_lines);
