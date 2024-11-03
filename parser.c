@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/10/31 11:28:43 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/03 21:01:38 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,24 @@ static char	*remove_nl(char *line)
 
 static void	extract_map(t_info *info, int n_lines)
 {
-	// int	i;
+	int		i;
+	size_t	len;
 
-	// i = 0;
-	n_lines -= 2;
-	if (!all_one(info->map[0]) && !all_one(info->map[n_lines]))
+	i = 0;
+	n_lines -= 1;
+	if (!all_one(info->map[0]) || !all_one(info->map[n_lines]))
 		exit_error("Error\nFirst Line and Last Line not all 1");
 	while (start_end_one(info->map[n_lines]) && n_lines >= 1)
 		n_lines--;
 	if (n_lines != 0)
 		exit_error("Error\n map not surrounded by 1");
+	while (info->map[i] && info->map[i + 1])
+	{
+		len = ft_strlen(info->map[i]);
+		if (len != ft_strlen(info->map[i + 1]))
+			exit_error("Error\nMap not rectangular");
+		i++;
+	}
 }
 
 static void	store_map(char *file, t_info *info)
@@ -84,6 +92,8 @@ static void	store_map(char *file, t_info *info)
 	n_lines = check_content(file) - 1;
 	info->map = malloc(n_lines * sizeof(char *));
 	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		exit_error("Error\nFile not found");
 	line = get_next_line(fd);
 	i = 0;
 	while (line)
@@ -100,6 +110,8 @@ static void	store_map(char *file, t_info *info)
 
 void	parser(t_mlx *mlx, char *file)
 {
+	if (!ft_strnstr(file, ".ber", ft_strlen(file)))
+		exit_error("Error\nFile not .ber");
 	mlx->info = malloc(sizeof(t_info));
 	if (!mlx->info)
 		exit_error("Malloc Faliure\n");
