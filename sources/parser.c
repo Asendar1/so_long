@@ -6,7 +6,7 @@
 /*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/03 21:01:38 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/04 23:24:56 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,35 @@ static char	*remove_nl(char *line)
 	return (str_rtn);
 }
 
-static void	extract_map(t_info *info, int n_lines)
+static void	extract_map(t_mlx *mlx, int n_lines)
 {
 	int		i;
 	size_t	len;
 
 	i = 0;
 	n_lines -= 1;
-	if (!all_one(info->map[0]) || !all_one(info->map[n_lines]))
+	if (!all_one(mlx->info->map[0]) || !all_one(mlx->info->map[n_lines]))
 		exit_error("Error\nFirst Line and Last Line not all 1");
-	while (start_end_one(info->map[n_lines]) && n_lines >= 1)
+	while (start_end_one(mlx->info->map[n_lines]) && n_lines >= 1)
 		n_lines--;
 	if (n_lines != 0)
 		exit_error("Error\n map not surrounded by 1");
-	while (info->map[i] && info->map[i + 1])
+	while (mlx->info->map[i] && mlx->info->map[i + 1])
 	{
-		len = ft_strlen(info->map[i]);
-		if (len != ft_strlen(info->map[i + 1]))
+		len = ft_strlen(mlx->info->map[i]);
+		if (len != ft_strlen(mlx->info->map[i + 1]))
+		{
+			free_map(mlx->info->map);
+			free(mlx->info);
+			free(mlx);
 			exit_error("Error\nMap not rectangular");
+		}
 		i++;
 	}
+	how_many(mlx->info);
 }
 
-static void	store_map(char *file, t_info *info)
+static void	store_map(char *file, t_mlx *mlx)
 {
 	int		fd;
 	int		i;
@@ -90,7 +96,7 @@ static void	store_map(char *file, t_info *info)
 	int		n_lines;
 
 	n_lines = check_content(file) - 1;
-	info->map = malloc(n_lines * sizeof(char *));
+	mlx->info->map = malloc((n_lines + 1) * sizeof(char *));
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		exit_error("Error\nFile not found");
@@ -98,22 +104,31 @@ static void	store_map(char *file, t_info *info)
 	i = 0;
 	while (line)
 	{
-		info->map[i] = remove_nl(line);
+		mlx->info->map[i] = remove_nl(line);
 		line = get_next_line(fd);
 		i++;
 	}
 	free(line);
-	info->map[i] = NULL;
+	mlx->info->map[i] = NULL;
 	close(fd);
-	extract_map(info, n_lines);
+	extract_map(mlx, n_lines);
 }
 
 void	parser(t_mlx *mlx, char *file)
 {
+	int		fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		free(mlx);
+		exit_error("Error\nFile not found");
+	}
+	close(fd);
 	if (!ft_strnstr(file, ".ber", ft_strlen(file)))
 		exit_error("Error\nFile not .ber");
 	mlx->info = malloc(sizeof(t_info));
 	if (!mlx->info)
 		exit_error("Malloc Faliure\n");
-	store_map(file, mlx->info);
+	store_map(file, mlx);
 }

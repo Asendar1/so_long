@@ -6,7 +6,7 @@
 /*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:11 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/03 20:30:12 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/04 22:41:24 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	draw_map(t_mlx *mlx)
 	int x;
 	
 	y = 0;
+	mlx->info->moves = 0;
 	// first_draw(mlx);
 	while (y < mlx->info->map_height)
 	{
@@ -64,7 +65,7 @@ void	draw_map(t_mlx *mlx)
 			if (mlx->info->map[y][x] == '1')
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgs->wall, x * IMG_PXL, y * IMG_PXL);
 			if (mlx->info->map[y][x] == 'P')
-				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgs->player_1, x * IMG_PXL, y * IMG_PXL);
+				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgs->player_down, x * IMG_PXL, y * IMG_PXL);
 			if (mlx->info->map[y][x] == 'E')
 				mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgs->exit, x * IMG_PXL, y * IMG_PXL);
 			if (mlx->info->map[y][x] == 'C')

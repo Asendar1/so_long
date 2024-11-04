@@ -6,7 +6,7 @@
 /*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:26 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/03 20:56:58 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/04 19:29:03 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,40 @@ int	start_end_one(char *line)
 		return (1);
 	return (0);
 }
+
+void	how_many (t_info *info)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	info->collectibles = 0;
+	info->player = 0;
+	info->exit = 0;
+	while (info->map[i])
+	{
+		j = 0;
+		while (info->map[i][j])
+		{
+			if (info->map[i][j] == 'P')
+			{
+				info->player++;
+				info->player_x = j;
+				info->player_y = i;
+			}
+			if (info->map[i][j] == 'C')
+				info->collectibles++;
+			if (info->map[i][j] == 'E')
+			{
+				info->exit_x = j;
+				info->exit_y = i;
+				info->exit++;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (info->player != 1 || info->exit != 1 || info->collectibles < 1)
+		exit_error("Error\nWrong Number of Player, Exit or Collectibles");
+}
+

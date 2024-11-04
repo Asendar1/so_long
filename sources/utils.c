@@ -6,11 +6,23 @@
 /*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:43 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/03 20:44:44 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/04 22:31:51 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void    destry_imgs(t_mlx *mlx)
+{
+    mlx_destroy_image(mlx->mlx, mlx->imgs->wall);
+    mlx_destroy_image(mlx->mlx, mlx->imgs->floor);
+    mlx_destroy_image(mlx->mlx, mlx->imgs->player_down);
+    mlx_destroy_image(mlx->mlx, mlx->imgs->player_up);
+    mlx_destroy_image(mlx->mlx, mlx->imgs->player_left);
+    mlx_destroy_image(mlx->mlx, mlx->imgs->player_right);
+    mlx_destroy_image(mlx->mlx, mlx->imgs->collectible);
+    mlx_destroy_image(mlx->mlx, mlx->imgs->exit);
+}
 
 int close_window(t_mlx *mlx)
 {
@@ -19,16 +31,7 @@ int close_window(t_mlx *mlx)
     i = 0;
     if (mlx->imgs)
     {
-        if (mlx->imgs->wall)
-            mlx_destroy_image(mlx->mlx, mlx->imgs->wall);
-        if (mlx->imgs->floor)
-            mlx_destroy_image(mlx->mlx, mlx->imgs->floor);
-        if (mlx->imgs->player_1)
-            mlx_destroy_image(mlx->mlx, mlx->imgs->player_1);
-        if (mlx->imgs->exit)
-            mlx_destroy_image(mlx->mlx, mlx->imgs->exit);
-        if (mlx->imgs->collectible)
-            mlx_destroy_image(mlx->mlx, mlx->imgs->collectible);
+        destry_imgs(mlx);
     }
     if (mlx->img)
         mlx_destroy_image(mlx->mlx, mlx->img);

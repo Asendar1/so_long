@@ -6,7 +6,7 @@
 /*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:00 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/03 21:05:20 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/04 19:58:20 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int argc, char **argv)
 		mlx = malloc(sizeof(t_mlx));
 		parser(mlx, argv[1]);
 		get_height_width(mlx);
+		flood_fill(mlx->info);
 		mlx = init_mlx(argv[1], mlx);
 		image_init(mlx);
 		draw_map(mlx);
