@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:36 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 16:29:12 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:30:17 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	image_init(t_mlx *mlx);
 void    hook_controls(t_mlx *mlx);
 void	parser(t_mlx *mlx, char *file);
 void	draw_map(t_mlx *mlx);
-void	how_many (t_info *info);
+void	how_many (t_mlx *mlx);
 void	get_height_width(t_mlx *mlx);
 void	flood_fill(t_mlx *mlx);
 void	move_up(t_mlx *mlx);

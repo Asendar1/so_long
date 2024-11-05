@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:26 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 16:22:46 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:29:41 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,28 @@ void	norm_isbad(t_info *info, int i, int j)
 	}
 }
 
-void	how_many(t_info *info)
+void	how_many(t_mlx *mlx)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	info->collectibles = 0;
-	info->player = 0;
-	info->exit = 0;
-	while (info->map[i])
+	mlx->info->collectibles = 0;
+	mlx->info->player = 0;
+	mlx->info->exit = 0;
+	while (mlx->info->map[i])
 	{
 		j = 0;
-		while (info->map[i][j])
+		while (mlx->info->map[i][j])
 		{
-			norm_isbad(info, i, j);
+			norm_isbad(mlx->info, i, j);
 			j++;
 		}
 		i++;
 	}
-	if (info->player != 1 || info->exit != 1 || info->collectibles < 1)
+	if (mlx->info->player != 1 || mlx->info->exit != 1 || mlx->info->collectibles < 1)
+	{
+		free_exit(mlx);
 		exit_error("Error\nWrong Number of Player, Exit or Collectibles");
+	}
 }

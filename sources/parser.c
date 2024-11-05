@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 16:51:35 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:28:34 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	extract_map(t_mlx *mlx, int n_lines)
 		}
 		i++;
 	}
-	how_many(mlx->info);
+	how_many(mlx);
 }
 
 static void	store_map(char *file, t_mlx *mlx)
