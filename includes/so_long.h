@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:36 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/04 23:31:04 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/05 16:29:12 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_info
 	int     collectibles;
 	int     moves;
 	char    **map;
+	char	**copy;
 }    t_info;
 
 typedef struct s_img
@@ -84,6 +85,7 @@ void	move_left(t_mlx *mlx);
 void	move_right(t_mlx *mlx);
 void	free_map(char **copy);
 void    destry_imgs(t_mlx *mlx);
+void	free_exit(t_mlx *mlx);
 int     close_window(t_mlx *mlx);
 int		valid_character(char c);
 int		all_one(char *line);

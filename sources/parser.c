@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/04 23:24:56 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/05 16:51:35 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 static int	check_content(char *file)
 {
@@ -72,15 +72,16 @@ static void	extract_map(t_mlx *mlx, int n_lines)
 	while (start_end_one(mlx->info->map[n_lines]) && n_lines >= 1)
 		n_lines--;
 	if (n_lines != 0)
+	{
+		free_exit(mlx);
 		exit_error("Error\n map not surrounded by 1");
+	}
 	while (mlx->info->map[i] && mlx->info->map[i + 1])
 	{
 		len = ft_strlen(mlx->info->map[i]);
 		if (len != ft_strlen(mlx->info->map[i + 1]))
 		{
-			free_map(mlx->info->map);
-			free(mlx->info);
-			free(mlx);
+			free_exit(mlx);
 			exit_error("Error\nMap not rectangular");
 		}
 		i++;

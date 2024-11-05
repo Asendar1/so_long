@@ -1,25 +1,37 @@
-#include "so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flood.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/05 16:09:14 by hassende          #+#    #+#             */
+/*   Updated: 2024/11/05 16:38:12 by hassende         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void flooder(t_info *info, int x, int y, int *collect_check, char **copy)
+#include "../includes/so_long.h"
+
+static void	flooder(t_info *info, int x, int y, int *collect_check)
 {
 	if (x < 0 || y < 0 || x >= info->map_width || y >= info->map_height)
 		return ;
-	if (copy[y][x] == '1' || copy[y][x] == 'V')
+	if (info->copy[y][x] == '1' || info->copy[y][x] == 'V')
 		return ;
-	if (copy[y][x] == 'E')
+	if (info->copy[y][x] == 'E')
 		info->exit = 0;
-	if (copy[y][x] == 'C')
+	if (info->copy[y][x] == 'C')
 		(*collect_check)--;
-	copy[y][x] = 'V';
-	flooder(info, x + 1, y, collect_check, copy);
-	flooder(info, x - 1, y, collect_check, copy);
-	flooder(info, x, y + 1, collect_check, copy);
-	flooder(info, x, y - 1, collect_check, copy);
+	info->copy[y][x] = 'V';
+	flooder(info, x + 1, y, collect_check);
+	flooder(info, x - 1, y, collect_check);
+	flooder(info, x, y + 1, collect_check);
+	flooder(info, x, y - 1, collect_check);
 }
 
-static char **copy_map(t_info *info)
+static char	**copy_map(t_info *info)
 {
-	int 	i;
+	int		i;
 	char	**copy;
 
 	i = 0;
@@ -37,7 +49,7 @@ static char **copy_map(t_info *info)
 	return (copy);
 }
 
-void free_map(char **copy)
+void	free_map(char **copy)
 {
 	int	i;
 
@@ -53,20 +65,18 @@ void free_map(char **copy)
 void	flood_fill(t_mlx *mlx)
 {
 	int		collect_check;
-	char	**copy;
 
-	copy = copy_map(mlx->info);
+	mlx->info->copy = copy_map(mlx->info);
 	collect_check = mlx->info->collectibles;
-	flooder(mlx->info, mlx->info->player_x, mlx->info->player_y, &collect_check, copy);
+	flooder(mlx->info, mlx->info->player_x,
+		mlx->info->player_y, &collect_check);
 	if (collect_check != 0 || mlx->info->exit != 0)
 	{
-		// destry_imgs(mlx);
-		// free(mlx->imgs);
-		// free(mlx->info->map);
-		// free(mlx->info);
-		// free(mlx);
-		// free_map(copy);
+		free_map(mlx->info->map);
+		free_map(mlx->info->copy);
+		free(mlx->info);
+		free(mlx);
 		exit_error("Error\nInvalid map, exit or collectibles unreachable");
 	}
-	free_map(copy);
+	free_map(mlx->info->copy);
 }

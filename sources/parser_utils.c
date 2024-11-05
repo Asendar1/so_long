@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:26 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/04 19:29:03 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/05 16:22:46 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 int	valid_character(char c)
 {
@@ -43,7 +43,25 @@ int	start_end_one(char *line)
 	return (0);
 }
 
-void	how_many (t_info *info)
+void	norm_isbad(t_info *info, int i, int j)
+{
+	if (info->map[i][j] == 'P')
+	{
+		info->player++;
+		info->player_x = j;
+		info->player_y = i;
+	}
+	if (info->map[i][j] == 'C')
+		info->collectibles++;
+	if (info->map[i][j] == 'E')
+	{
+		info->exit_x = j;
+		info->exit_y = i;
+		info->exit++;
+	}
+}
+
+void	how_many(t_info *info)
 {
 	int	i;
 	int	j;
@@ -57,20 +75,7 @@ void	how_many (t_info *info)
 		j = 0;
 		while (info->map[i][j])
 		{
-			if (info->map[i][j] == 'P')
-			{
-				info->player++;
-				info->player_x = j;
-				info->player_y = i;
-			}
-			if (info->map[i][j] == 'C')
-				info->collectibles++;
-			if (info->map[i][j] == 'E')
-			{
-				info->exit_x = j;
-				info->exit_y = i;
-				info->exit++;
-			}
+			norm_isbad(info, i, j);
 			j++;
 		}
 		i++;
@@ -78,4 +83,3 @@ void	how_many (t_info *info)
 	if (info->player != 1 || info->exit != 1 || info->collectibles < 1)
 		exit_error("Error\nWrong Number of Player, Exit or Collectibles");
 }
-
