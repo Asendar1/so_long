@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:17 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 16:00:43 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/09 21:07:15 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,16 @@
 
 int	key_press(int keycode, t_mlx *mlx)
 {
-	if (keycode == XK_Escape)
+	if (keycode == XK_Escape || keycode == XK_q)
 		close_window(mlx);
-	if (keycode == XK_w)
-	{
+	if (keycode == XK_w || keycode == XK_Up)
 		move_up(mlx);
-	}
-	if (keycode == XK_s)
-	{
+	if (keycode == XK_s || keycode == XK_Down)
 		move_down(mlx);
-	}
-	if (keycode == XK_a)
-	{
+	if (keycode == XK_a || keycode == XK_Left)
 		move_left(mlx);
-	}
-	if (keycode == XK_d)
-	{
+	if (keycode == XK_d || keycode == XK_Right)
 		move_right(mlx);
-	}
 	return (0);
 }
 

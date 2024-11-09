@@ -6,7 +6,7 @@
 /*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 21:28:34 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/09 21:09:49 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,10 @@ void	parser(t_mlx *mlx, char *file)
 	}
 	close(fd);
 	if (!ft_strnstr(file, ".ber", ft_strlen(file)))
+	{
+		free(mlx);
 		exit_error("Error\nFile not .ber");
+	}
 	mlx->info = malloc(sizeof(t_info));
 	if (!mlx->info)
 		exit_error("Malloc Faliure\n");
