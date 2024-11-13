@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:26 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 21:29:41 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/13 14:28:28 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	all_one(char *line)
 	int	i;
 
 	i = 0;
+	if (!line)
+	{
+		free(line);
+		exit(1);
+	}
 	while (line[i])
 	{
 		if (line[i] != '1')
@@ -80,7 +85,8 @@ void	how_many(t_mlx *mlx)
 		}
 		i++;
 	}
-	if (mlx->info->player != 1 || mlx->info->exit != 1 || mlx->info->collectibles < 1)
+	if (mlx->info->player != 1 || mlx->info->exit != 1
+		|| mlx->info->collectibles < 1)
 	{
 		free_exit(mlx);
 		exit_error("Error\nWrong Number of Player, Exit or Collectibles");

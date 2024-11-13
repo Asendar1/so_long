@@ -1,12 +1,12 @@
 SRCSDIR = sources/
-SRCS = $(addprefix $(SRCSDIR), main.c controls.c utils.c parser.c parser_utils.c draw.c file_manage.c flood.c movement.c) \
+SRCS = $(addprefix $(SRCSDIR), main.c controls.c utils.c parser.c parser_utils.c draw.c file_manage.c flood.c movement.c utils2.c) \
 		gnl/get_next_line_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 
 LIBFT = libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes -g
+CFLAGS = -Wall -Wextra -Werror -I./includes
 MLX_DIR = minilibx-linux
 MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 NAME = so_long

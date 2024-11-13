@@ -6,7 +6,7 @@
 /*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:14:59 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 16:53:35 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:11:19 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	move_up(t_mlx *mlx)
 	}
 	if (mlx->info->map[mlx->info->player_y][mlx->info->player_x] == 'E'
 		&& mlx->info->collectibles == 0)
-		mlx_string_put(mlx->mlx, mlx->win, 100, 100, 0, "You Win!");
+		win_state(mlx);
 	if (mlx->info->map[mlx->info->player_y + 1][mlx->info->player_x] == 'E')
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgs->exit,
 			mlx->info->player_x * IMG_PXL, mlx->info->player_y * IMG_PXL + 50);
@@ -65,7 +65,7 @@ void	move_down(t_mlx *mlx)
 	}
 	if (mlx->info->map[mlx->info->player_y][mlx->info->player_x] == 'E' &&
 		mlx->info->collectibles == 0)
-		mlx_string_put(mlx->mlx, mlx->win, 100, 100, 0, "You Win!");
+		win_state(mlx);
 	if (mlx->info->map[mlx->info->player_y - 1][mlx->info->player_x] == 'E')
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgs->exit,
 			mlx->info->player_x * IMG_PXL, mlx->info->player_y * IMG_PXL - 50);
@@ -89,7 +89,7 @@ void	move_left(t_mlx *mlx)
 	}
 	if (mlx->info->map[mlx->info->player_y][mlx->info->player_x] == 'E'
 		&& mlx->info->collectibles == 0)
-		mlx_string_put(mlx->mlx, mlx->win, 100, 100, 0, "You Win!");
+		win_state(mlx);
 	if (mlx->info->map[mlx->info->player_y][mlx->info->player_x + 1] == 'E')
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgs->exit,
 			mlx->info->player_x * IMG_PXL + 50, mlx->info->player_y * IMG_PXL);
@@ -113,7 +113,7 @@ void	move_right(t_mlx *mlx)
 	}
 	if (mlx->info->map[mlx->info->player_y][mlx->info->player_x] == 'E'
 		&& mlx->info->collectibles == 0)
-		mlx_string_put(mlx->mlx, mlx->win, 100, 100, 0, "You Win!");
+		win_state(mlx);
 	if (mlx->info->map[mlx->info->player_y][mlx->info->player_x - 1] == 'E')
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->imgs->exit,
 			mlx->info->player_x * IMG_PXL - 50, mlx->info->player_y * IMG_PXL);

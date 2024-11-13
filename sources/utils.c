@@ -6,7 +6,7 @@
 /*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:43 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 16:50:09 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:55:18 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,11 @@ void	exit_error(char *error)
 {
 	ft_putendl_fd(error, 2);
 	exit(1);
+}
+
+void	win_state(t_mlx *mlx)
+{
+	ft_printf("Moves: %d\n", ++mlx->info->moves);
+	write(1, "Congratulation! You Won.\n", 26);
+	close_window(mlx);
 }

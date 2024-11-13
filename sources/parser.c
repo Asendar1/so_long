@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/09 21:09:49 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/13 14:41:42 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	extract_map(t_mlx *mlx, int n_lines)
 	i = 0;
 	n_lines -= 1;
 	if (!all_one(mlx->info->map[0]) || !all_one(mlx->info->map[n_lines]))
-		exit_error("Error\nFirst Line and Last Line not all 1");
+		free_exit_error(mlx, "Error\nFirst Line and Last Line not all 1");
 	while (start_end_one(mlx->info->map[n_lines]) && n_lines >= 1)
 		n_lines--;
 	if (n_lines != 0)
@@ -100,9 +100,11 @@ static void	store_map(char *file, t_mlx *mlx)
 	mlx->info->map = malloc((n_lines + 1) * sizeof(char *));
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		exit_error("Error\nFile not found");
+		free_exit_error(mlx, "Error\nFile Doesn't Exist");
 	line = get_next_line(fd);
 	i = 0;
+	if (!line)
+		free_exit_error(mlx, "Error\nEmpty File");
 	while (line)
 	{
 		mlx->info->map[i] = remove_nl(line);
