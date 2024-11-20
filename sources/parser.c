@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/13 14:41:42 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:02:24 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "so_long.h"
 
 static int	check_content(char *file)
 {
@@ -97,7 +97,7 @@ static void	store_map(char *file, t_mlx *mlx)
 	int		n_lines;
 
 	n_lines = check_content(file) - 1;
-	mlx->info->map = malloc((n_lines + 1) * sizeof(char *));
+	mlx->info->map = ft_calloc((n_lines + 1), sizeof(char *));
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		free_exit_error(mlx, "Error\nFile Doesn't Exist");
@@ -128,7 +128,7 @@ void	parser(t_mlx *mlx, char *file)
 		exit_error("Error\nFile not found");
 	}
 	close(fd);
-	if (!ft_strnstr(file, ".ber", ft_strlen(file)))
+	if (!is_ber(file))
 	{
 		free(mlx);
 		exit_error("Error\nFile not .ber");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:26 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/13 14:28:28 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:56:14 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	all_one(char *line)
 	i = 0;
 	if (!line)
 	{
-		free(line);
 		exit(1);
 	}
 	while (line[i])

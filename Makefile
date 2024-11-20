@@ -1,37 +1,66 @@
 SRCSDIR = sources/
-SRCS = $(addprefix $(SRCSDIR), main.c controls.c utils.c parser.c parser_utils.c draw.c file_manage.c flood.c movement.c utils2.c) \
-		gnl/get_next_line_bonus.c
+SRCS = $(addprefix $(SRCSDIR), utils2.c main.c controls.c utils.c parser.c parser_utils.c draw.c file_manage.c flood.c movement.c) \
 
-OBJS = $(SRCS:.c=.o)
+OBJSDIR = objects/
 
-LIBFT = libft.a
+OBJS = $(SRCS:$(SRCSDIR)%.c=$(OBJSDIR)%.o)
+
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes
+CFLAGS = -Wall -Wextra -Werror -Iincludes -g
+
 MLX_DIR = minilibx-linux
 MLX = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-NAME = so_long
 INCLUDES = -I$(MLX_DIR) -I.
-LIBFT = -L./libft -lft
-FTPRINT_F = -L./ft_printf -lftprintf
 
+NAME = so_long
+
+LIBFT = libft/libft.a
+LIBFT_LIB = -L./libft -lft -Ilibft
+
+FT_PRINTF = ft_printf/libftprintf.a
+FT_PRINTF_LIB = -L./ft_printf -lftprintf
+
+GREEN = \033[32m
+WHITE = \033[37m
+RESET = \033[0m
 
 all: $(NAME)
 
 $(MLX_DIR)/libmlx.a:
-	$(MAKE) -C $(MLX_DIR)
-$(NAME): $(OBJS) $(MLX_DIR)/libmlx.a
-	make -C libft
-	make -C ft_printf
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(FTPRINT_F) $(MLX) -o $(NAME)
+	@echo "$(WHITE)Compiling MLX...$(RESET)"
+	@$(MAKE) -C $(MLX_DIR) -s
+	@echo "$(GREEN)Compiling MLX: Done$(RESET)"
+
+$(NAME): $(OBJS) $(MLX_DIR)/libmlx.a $(LIBFT) $(FT_PRINTF) $(GNL)
+	@echo "$(WHITE)Compiling $(NAME)...$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -Ilibft $(FT_PRINTF_LIB) $(MLX) -o $(NAME)
+	@echo "$(GREEN)Compiling $(NAME): Done$(RESET)"
+
+$(OBJSDIR)%.o: $(SRCSDIR)%.c
+	@echo "$(WHITE)Compiling $@...$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(GREEN)Compiling $@: Done$(RESET)"
+
+$(LIBFT):
+	@make -C libft
+
+$(FT_PRINTF):
+	@make -C ft_printf -s
 
 clean:
-	make clean -C ./libft
-	make clean -C $(MLX_DIR)
-	rm -f $(OBJS) 
+	@echo "$(WHITE)Cleaning...$(RESET)"
+	@make -s clean -C libft
+	@make -s clean -C $(MLX_DIR)
+	@make -s clean -C ft_printf
+	@rm -f $(OBJS)
+	@echo "$(GREEN)Cleaning: Done$(RESET)"
 
 fclean: clean
-	make fclean -C ./libft
-	rm -f $(NAME)
+	@echo "$(WHITE)Full Cleaning...$(RESET)"
+	@make -s fclean -C libft
+	@make -s fclean -C ft_printf
+	@rm -f $(NAME)
+	@echo "$(GREEN)Full Cleaning: Done$(RESET)"
 
 re: fclean all
 

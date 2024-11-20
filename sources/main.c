@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:00 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 16:14:47 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:01:52 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "so_long.h"
 
 t_mlx	*init_mlx(char *title, t_mlx *mlx)
 {
@@ -42,6 +42,8 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		mlx = malloc(sizeof(t_mlx));
+		if (!mlx)
+			exit_error("Malloc Faliure\n");
 		parser(mlx, argv[1]);
 		get_height_width(mlx);
 		flood_fill(mlx);

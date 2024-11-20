@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_manage.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:06:48 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/05 16:08:47 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:00:23 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	image_init(t_mlx *mlx)
 	int	a;
 
 	mlx->imgs = malloc(sizeof(t_img));
+	if (!mlx->imgs)
+		exit_error("Malloc Faliure\n");
 	mlx->imgs->wall = mlx_xpm_file_to_image(mlx->mlx,
 			"textures/wall.xpm", &a, &a);
 	mlx->imgs->floor = mlx_xpm_file_to_image(mlx->mlx,

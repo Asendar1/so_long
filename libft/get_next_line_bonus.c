@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:22:45 by hassende          #+#    #+#             */
-/*   Updated: 2024/10/12 16:51:13 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:43:11 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "libft.h"
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 32
+#endif
 #define MAX_FD 1024
 #define MAX_LEFT_SIZE 4096
 
@@ -86,7 +89,8 @@ char	*get_next_line(int fd)
 		free(line);
 		return (NULL);
 	}
-	return (set_line(line, &left_c[fd]));
+	line = set_line(line, &left_c[fd]);
+	return (line);
 }
 
 /*#include <stdio.h>

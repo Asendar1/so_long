@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:36 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/13 14:53:19 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:47:02 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <string.h>
 
 # include "../libft/libft.h"
-# include "../gnl/get_next_line_bonus.h"
 # include "../ft_printf/includes/ft_printf.h"
 
 # define IMG_PXL 50
@@ -87,6 +86,8 @@ void	move_right(t_mlx *mlx);
 void	destry_imgs(t_mlx *mlx);
 void	free_exit(t_mlx *mlx);
 void	win_state(t_mlx *mlx);
+char	*get_next_line(int fd);
+int		is_ber(char *file);
 int		valid_character(char c);
 int		all_one(char *line);
 int		start_end_one(char *line);
