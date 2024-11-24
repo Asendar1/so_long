@@ -6,7 +6,7 @@
 /*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/20 18:02:24 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/24 23:28:35 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,6 @@ static void	store_map(char *file, t_mlx *mlx)
 
 void	parser(t_mlx *mlx, char *file)
 {
-	int		fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-	{
-		free(mlx);
-		exit_error("Error\nFile not found");
-	}
-	close(fd);
 	if (!is_ber(file))
 	{
 		free(mlx);
