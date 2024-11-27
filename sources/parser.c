@@ -3,48 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/24 23:28:35 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/27 14:53:06 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	check_content(char *file)
-{
-	int		fd;
-	int		i;
-	int		n_lines;
-	char	*line;
+// static int	check_content(char *file)
+// {
+// 	int		fd;
+// 	int		i;
+// 	int		n_lines;
+// 	char	*line;
 
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
-	n_lines = 1;
-	while (line)
-	{
-		i = 0;
-		while (line[i])
-		{
-			if (valid_character(line[i]) && line[i] != '\n')
-				exit_error("Error\nInvalid character in map\n");
-			i++;
-		}
-		free(line);
-		line = get_next_line(fd);
-		n_lines++;
-	}
-	free(line);
-	close(fd);
-	return (n_lines);
-}
+// 	fd = open(file, O_RDONLY);
+// 	line = get_next_line(fd);
+// 	n_lines = 1;
+// 	while (line)
+// 	{
+// 		i = 0;
+// 		while (line[i])
+// 		{
+// 			if (valid_character(line[i]) && line[i] != '\n')
+// 				exit_error("Error\nInvalid character in map\n");
+// 			i++;
+// 		}
+// 		free(line);
+// 		line = get_next_line(fd);
+// 		n_lines++;
+// 	}
+// 	free(line);
+// 	close(fd);
+// 	return (n_lines);
+// }
 
 static char	*remove_nl(char *line)
 {
 	int		i;
 	char	*str_rtn;
 
+	if (valid_character(line))
+		exit_error("Error\nInvalid character in map\n");
 	str_rtn = ft_strdup(line);
 	free(line);
 	i = 0;
@@ -96,8 +98,8 @@ static void	store_map(char *file, t_mlx *mlx)
 	char	*line;
 	int		n_lines;
 
-	n_lines = check_content(file) - 1;
-	mlx->info->map = ft_calloc((n_lines + 1), sizeof(char *));
+	n_lines = 0;
+	mlx->info->map = ft_calloc((100), sizeof(char *));
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		free_exit_error(mlx, "Error\nFile Doesn't Exist");
@@ -110,6 +112,7 @@ static void	store_map(char *file, t_mlx *mlx)
 		mlx->info->map[i] = remove_nl(line);
 		line = get_next_line(fd);
 		i++;
+		n_lines++;
 	}
 	free(line);
 	mlx->info->map[i] = NULL;

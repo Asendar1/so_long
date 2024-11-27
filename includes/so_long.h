@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:36 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/20 17:47:02 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/11/27 14:49:14 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	free_exit(t_mlx *mlx);
 void	win_state(t_mlx *mlx);
 char	*get_next_line(int fd);
 int		is_ber(char *file);
-int		valid_character(char c);
+int		valid_character(char *line);
 int		all_one(char *line);
 int		start_end_one(char *line);
 int		close_window(t_mlx *mlx);
