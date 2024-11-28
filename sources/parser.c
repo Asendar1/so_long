@@ -3,50 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/27 14:53:06 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/28 20:29:48 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// static int	check_content(char *file)
-// {
-// 	int		fd;
-// 	int		i;
-// 	int		n_lines;
-// 	char	*line;
-
-// 	fd = open(file, O_RDONLY);
-// 	line = get_next_line(fd);
-// 	n_lines = 1;
-// 	while (line)
-// 	{
-// 		i = 0;
-// 		while (line[i])
-// 		{
-// 			if (valid_character(line[i]) && line[i] != '\n')
-// 				exit_error("Error\nInvalid character in map\n");
-// 			i++;
-// 		}
-// 		free(line);
-// 		line = get_next_line(fd);
-// 		n_lines++;
-// 	}
-// 	free(line);
-// 	close(fd);
-// 	return (n_lines);
-// }
-
-static char	*remove_nl(char *line)
+static char	*remove_nl(t_mlx *mlx, char *line)
 {
 	int		i;
 	char	*str_rtn;
 
 	if (valid_character(line))
-		exit_error("Error\nInvalid character in map\n");
+	{
+		free(line);
+		free_exit_error(mlx ,"Error\nInvalid character in map");
+	}
 	str_rtn = ft_strdup(line);
 	free(line);
 	i = 0;
@@ -109,7 +84,7 @@ static void	store_map(char *file, t_mlx *mlx)
 		free_exit_error(mlx, "Error\nEmpty File");
 	while (line)
 	{
-		mlx->info->map[i] = remove_nl(line);
+		mlx->info->map[i] = remove_nl(mlx, line);
 		line = get_next_line(fd);
 		i++;
 		n_lines++;

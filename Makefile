@@ -42,16 +42,16 @@ $(OBJSDIR)%.o: $(SRCSDIR)%.c
 	@echo "$(GREEN)Compiling $@: Done$(RESET)"
 
 $(LIBFT):
-	@make -C libft
+	@make -C libft -s 
 
 $(FT_PRINTF):
 	@make -C ft_printf -s
 
 clean:
 	@echo "$(WHITE)Cleaning...$(RESET)"
-	@make -s clean -C libft
+	@make -s fclean -C libft
 	@make -s clean -C $(MLX_DIR)
-	@make -s clean -C ft_printf
+	@make -s fclean -C ft_printf
 	@rm -f $(OBJS)
 	@echo "$(GREEN)Cleaning: Done$(RESET)"
 

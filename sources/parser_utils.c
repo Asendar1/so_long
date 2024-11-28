@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:26 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/27 14:48:48 by hassende         ###   ########.fr       */
+/*   Updated: 2024/11/28 20:27:41 by hamzah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	valid_character(char *c)
 	while (c[i])
 	{
 		if (c[i] != '1' && c[i] != '0' && c[i] != 'P' && c[i] != 'C' && c[i] != 'E')
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	all_one(char *line)
