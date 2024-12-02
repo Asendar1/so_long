@@ -1,5 +1,5 @@
 SRCSDIR = sources/
-SRCS = $(addprefix $(SRCSDIR), utils2.c main.c controls.c utils.c parser.c parser_utils.c draw.c file_manage.c flood.c movement.c) \
+SRCS = $(addprefix $(SRCSDIR), main.c controls.c utils.c utils2.c parser.c parser_utils.c draw.c file_manage.c flood.c movement.c)
 
 OBJSDIR = objects/
 
@@ -31,18 +31,21 @@ $(MLX_DIR)/libmlx.a:
 	@$(MAKE) -C $(MLX_DIR) -s
 	@echo "$(GREEN)Compiling MLX: Done$(RESET)"
 
-$(NAME): $(OBJS) $(MLX_DIR)/libmlx.a $(LIBFT) $(FT_PRINTF) $(GNL)
+$(NAME): $(OBJS) $(MLX_DIR)/libmlx.a $(LIBFT) $(FT_PRINTF)
 	@echo "$(WHITE)Compiling $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -Ilibft $(FT_PRINTF_LIB) $(MLX) -o $(NAME)
 	@echo "$(GREEN)Compiling $(NAME): Done$(RESET)"
 
-$(OBJSDIR)%.o: $(SRCSDIR)%.c
+$(OBJSDIR):
+	@mkdir -p $(OBJSDIR)
+
+$(OBJSDIR)%.o: $(SRCSDIR)%.c | $(OBJSDIR)
 	@echo "$(WHITE)Compiling $@...$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(GREEN)Compiling $@: Done$(RESET)"
 
 $(LIBFT):
-	@make -C libft -s 
+	@make -C libft -s
 
 $(FT_PRINTF):
 	@make -C ft_printf -s

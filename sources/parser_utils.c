@@ -3,26 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:26 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/28 20:27:41 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/12/02 13:30:54 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	valid_character(char *c)
+int	valid_character(char c)
 {
-	int		i;
-
-	i = 0;
-	while (c[i])
-	{
-		if (c[i] != '1' && c[i] != '0' && c[i] != 'P' && c[i] != 'C' && c[i] != 'E')
-			return (0);
-		i++;
-	}
+	if (c != '1' && c != 'P' && c != 'E' && c != 'C' && c != '0')
+		return (0);
 	return (1);
 }
 

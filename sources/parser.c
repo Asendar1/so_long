@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamzah <hamzah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hassende <hassende@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:20:31 by hassende          #+#    #+#             */
-/*   Updated: 2024/11/28 20:29:48 by hamzah           ###   ########.fr       */
+/*   Updated: 2024/12/02 13:43:53 by hassende         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,24 @@
 
 static char	*remove_nl(t_mlx *mlx, char *line)
 {
-	int		i;
 	char	*str_rtn;
+	char	*newline_pos;
 
-	if (valid_character(line))
+	newline_pos = line;
+	while (*newline_pos)
 	{
-		free(line);
-		free_exit_error(mlx ,"Error\nInvalid character in map");
+		if (!valid_character(*newline_pos) && *newline_pos != '\n')
+		{
+			free(line);
+			free_exit_error(mlx, "Error\nInvalid character in map");
+		}
+		newline_pos++;
 	}
 	str_rtn = ft_strdup(line);
 	free(line);
-	i = 0;
-	while (str_rtn[i] != '\0')
-	{
-		if (str_rtn[i] == '\n')
-		{
-			str_rtn[i] = '\0';
-			break ;
-		}
-		i++;
-	}
+	newline_pos = ft_strchr(str_rtn, '\n');
+	if (newline_pos)
+		*newline_pos = '\0';
 	return (str_rtn);
 }
 
